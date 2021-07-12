@@ -1,6 +1,8 @@
 import { Command } from 'commander';
 import { Game } from './models/game';
+import { Individual } from './models/individual';
 import { logger } from './utils/logger';
+import { separateArray } from './utils/separate-array';
 
 try {
   const program = new Command();
@@ -17,11 +19,16 @@ try {
     logger.error('La taille du sudoku doit être un multiple de trois.');
   } else {
     const game: Game = new Game({
-      sudokuSize: options.size,
-      populationCount: options.population
+      sudokuSize: Number(options.size),
+      populationCount: Number(options.population)
     });
 
-    console.log(game.population.individuals.values);
+    game.run();
+    game.population.individuals.forEach((element: Individual) => {
+      console.log('====================');
+      logger.info(`${element.fitness} / 243`);
+      console.table(separateArray(element.grid, Number(options.size)));
+    });
   }
 } catch (error: any) {
   logger.error(error.message);

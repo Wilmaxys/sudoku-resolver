@@ -1,28 +1,32 @@
+import { BaseConf } from './base-conf';
 import { Individual } from './individual';
 
 export class Population {
   individuals: Individual[] = [];
 
-  generate(sudokuSize: number, pupulationCount: number): void {
-    for (let i = 0; i < pupulationCount; i++) {
+  generate(baseConf: BaseConf): void {
+    const { sudokuSize, populationCount } = baseConf;
+
+    for (let i = 0; i < populationCount; i++) {
       const individual: Individual = new Individual();
 
       for (let j = 1; j < sudokuSize + 1; j++) {
         for (let k = 1; k < sudokuSize + 1; k++) {
-          individual.values[k + sudokuSize * (j - 1)] = j;
+          individual.grid[k + sudokuSize * (j - 1) - 1] = j;
         }
       }
 
-      individual.values = individual.values.sort(() => 0.5 - Math.random());
+      individual.grid = individual.grid.sort(() => 0.5 - Math.random());
       this.individuals.push(individual);
     }
   }
 
-  sort(): void {
-    /*  Sort the population based on fitness.  */
-    //this.candidates.sort(this.sort_fitness);
-    //return;
+  update_fitness(baseConf: BaseConf): void {
+    this.individuals.forEach((element: Individual) => {
+      element.update_fitness(baseConf);
+    });
   }
+
   sort_fitness(): void {
     /*  The sorting function.  */
     //if (x.fitness < y.fitness) {

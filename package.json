@@ -4,7 +4,7 @@
   "description": "Sudoku solver using genetic algorithm",
   "main": "run.ts",
   "scripts": {
-    "start": "yarn ts-node src/run.ts -d -s 9 -p 2",
+    "start": "yarn ts-node src/run.ts -d -s 9 -p 5",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "author": "",

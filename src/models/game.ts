@@ -11,9 +11,7 @@ export class Game {
   }
 
   run(): void {
-    this.population.generate(
-      this.baseConf.sudokuSize,
-      this.baseConf.populationCount
-    );
+    this.population.generate(this.baseConf);
+    this.population.update_fitness(this.baseConf);
   }
 }
