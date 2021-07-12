@@ -13,6 +13,7 @@
 
 Cloner le projet :
 
+```bash
 git clone https://github.com/Wilmaxys/sudoku-resolver.git
 ```
 
